@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pkg-resources = "==0.0.0"
 pytz = "==2018.5"
 Django = "==2.1"
 
