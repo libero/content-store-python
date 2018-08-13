@@ -1,0 +1,14 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+pkg-resources = "==0.0.0"
+pytz = "==2018.5"
+Django = "==2.1"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
