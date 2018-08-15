@@ -4,5 +4,5 @@ app = Flask(__name__)
 
 
 @app.route("/ping")
-def hello():
+def ping():
     return "pong"
