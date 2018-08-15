@@ -1,8 +1,14 @@
 from flask import Flask
 
-app = Flask(__name__)
 
+def create_app(debug=False):
 
-@app.route("/ping")
-def ping():
-    return "pong"
+    app = Flask(__name__)
+    app.debug = debug
+
+    # could move to blueprint
+    @app.route("/ping")
+    def ping():
+        return "pong"
+
+    return app
