@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+    venv:
+        build:
+            context: .
+            dockerfile: Dockerfile.venv
+            args:
+                pipenv_dev_arg: ${PIPENV_DEV_ARG}
+        image: libero/digests_venv:${IMAGE_TAG}
+    cli:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                image_tag: ${IMAGE_TAG}
+        image: libero/digests:${IMAGE_TAG}
+        depends_on:
+            - venv
+
