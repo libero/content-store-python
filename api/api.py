@@ -19,10 +19,10 @@ def create_app(debug=False):
         :return: response with content "pong"
         """
         resp = Response("pong")
-        resp.headers['Cache-Control'] = "no-store, must-revalidate"
-        resp.headers['Content-Type'] = "text/plain; charset=utf-8"
-        if request.environ.get('SERVER_PROTOCOL') == "HTTP/1.0":
-            resp.headers['Expires'] = 0
+        resp.headers["Cache-Control"] = "no-store, must-revalidate"
+        resp.headers["Content-Type"] = "text/plain; charset=utf-8"
+        if request.environ.get("SERVER_PROTOCOL") == "HTTP/1.0":
+            resp.headers["Expires"] = 0
         return resp
 
     return app
