@@ -1,0 +1,16 @@
+sudo: required
+
+language: minimal
+
+services: docker
+
+install:
+    - docker-compose build
+
+script:
+    - docker-compose run web python -m pytest
+    - docker-compose up -d web
+    - /bin/bash -c '[ curl -s -o /dev/null -w "%{http_code}" localhost:5000/ping == 200 ]'
+
+after_script:
+    - docker-compose down
