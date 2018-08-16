@@ -20,5 +20,5 @@ curl -v localhost:5000/ping
 
 Running tests:
 ```
-docker-compose run cli .venv/bin/python -m pytest
+docker-compose run cli python -m pytest
 ```

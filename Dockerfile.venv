@@ -1,7 +1,6 @@
 FROM python:3.6.6-alpine3.8
 RUN pip install --no-cache-dir --only-binary --upgrade pipenv
 
-WORKDIR /app
 COPY Pipfile Pipfile.lock ./
 
 ARG pipenv_dev_arg

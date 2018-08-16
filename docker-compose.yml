@@ -17,7 +17,7 @@ services:
         image: libero/content-store:${IMAGE_TAG}
         environment:
             - FLASK_APP=api/api.py
-        command: .venv/bin/flask run --host=0.0.0.0
+        command: flask run --host=0.0.0.0
         stop_signal: SIGINT
         ports:
             - 5000:5000

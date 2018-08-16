@@ -4,6 +4,7 @@ FROM python:3.6.6-alpine3.8
 
 WORKDIR /app
 COPY api/ api/
-COPY --from=venv /app/.venv/ .venv/
+COPY --from=venv /.venv/ /.venv/
+ENV PYTHONUSERBASE=/.venv PATH=/.venv/bin:$PATH
 
-CMD [".venv/bin/python"]
+CMD ["python"]
