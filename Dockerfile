@@ -1,6 +1,7 @@
 ARG image_tag=latest
+ARG python_base_image_tag
 FROM libero/content-store_venv:${image_tag} as venv
-FROM python:3.6.6-alpine3.8
+FROM python:${python_base_image_tag}
 
 WORKDIR /app
 COPY api/ api/
