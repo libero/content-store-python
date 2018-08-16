@@ -20,6 +20,11 @@ Run the application:
 docker-compose up -d
 ```
 
+Check the application is responding:
+```
+curl -v localhost:5000/ping
+```
+
 Run tests:
 ```
 docker-compose run cli .venv/bin/python -m pytest
