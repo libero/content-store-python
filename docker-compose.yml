@@ -15,6 +15,11 @@ services:
             args:
                 image_tag: ${IMAGE_TAG}
         image: libero/digests:${IMAGE_TAG}
+        environment:
+            - FLASK_APP=api/api.py
+        command: .venv/bin/flask run
+        ports:
+            - 5000:5000
         depends_on:
             - venv
 

@@ -15,6 +15,11 @@ Build images:
 docker-compose build
 ```
 
+Run the application:
+```
+docker-compose up -d
+```
+
 Run tests:
 ```
 docker-compose run cli .venv/bin/python -m pytest
