@@ -6,4 +6,4 @@ COPY Pipfile Pipfile.lock ./
 
 ARG pipenv_dev_arg
 ENV PIPENV_VENV_IN_PROJECT=1 
-RUN pipenv install ${pipenv_dev_arg} --deploy
+RUN pipenv install ${pipenv_dev_arg} --deploy --ignore-pipfile
