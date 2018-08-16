@@ -8,7 +8,7 @@ services:
             args:
                 pipenv_dev_arg: ${PIPENV_DEV_ARG}
         image: libero/content-store_venv:${IMAGE_TAG}
-    cli:
+    web:
         build:
             context: .
             dockerfile: Dockerfile
