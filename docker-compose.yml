@@ -17,8 +17,8 @@ services:
         image: libero/digests:${IMAGE_TAG}
         environment:
             - FLASK_APP=api/api.py
-        # TODO: doesn't handle SIGTERM?
         command: .venv/bin/flask run --host=0.0.0.0
+        stop_signal: SIGINT
         ports:
             - 5000:5000
         depends_on:
