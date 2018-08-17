@@ -9,11 +9,11 @@ class PlaceholderArticleVersion(db.Model):
     version = db.Column(db.Integer())
     content = db.Column(db.Text())
 
-    def __init__(self, id: str, version: int, content=str) -> None:
+    def __init__(self, av_id: str, version: int, content=str) -> None:
 
-        self.id = id
+        self.id = av_id
         self.version = version
         self.content = content
 
     def __repr__(self) -> str:
-        return "<ArticleVersion {id} {version}>".format(id=self.id, version=self.version)
+        return "<ArticleVersion {id} {version}>".format(id=self.av_id, version=self.version)
