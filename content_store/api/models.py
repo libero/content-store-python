@@ -1,6 +1,6 @@
 from content_store.api.database import db
 
-ID_LENGTH = 36
+ID_LENGTH = 100
 
 
 class PlaceholderArticleVersion(db.Model):
