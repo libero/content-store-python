@@ -4,5 +4,12 @@ set -e
 timeout=30
 
 curl_command="curl -sS localhost:5000/ping | grep pong"
-echo "ping..."
-timeout "$timeout" bash -c "while ! ${curl_command}; do sleep 1; done"
+echo "Requesting /ping..."
+timeout "$timeout" bash -c "
+    while : ; do
+        echo 'Attempt...'
+        ${curl_command} && break || echo ping failed
+        sleep 1
+        echo
+    done
+"
