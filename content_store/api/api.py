@@ -4,7 +4,7 @@ from flask import Flask, make_response, request
 from content_store.api.models import ArticleVersion
 from uuid import uuid4
 from content_store.api.database import db
-
+from content_store.api.config import DevelopmentConfig
 
 def create_app(config=None):
     """
@@ -18,7 +18,10 @@ def create_app(config=None):
     if config:
         app.config.from_object(config)
     else:
-        app.config.from_object(os.environ['APP_SETTINGS'])
+        if "APP_SETTINGS" in os.environ:
+            app.config.from_object(os.environ["APP_SETTINGS"])
+        else:
+            app.config.from_object(DevelopmentConfig)
     db.init_app(app)
 
     # TODO : add migrations
