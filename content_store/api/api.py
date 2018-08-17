@@ -43,7 +43,7 @@ def create_app(config=None):
             resp.headers["Expires"] = 0
         return resp
 
-    @app.route("/testdb")
+    @app.route("/testdb", methods=["POST"])
     def testdb():
         """
         temporary route to test persistence
