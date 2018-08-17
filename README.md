@@ -8,5 +8,5 @@ defaults to content_store.api.config.DevelopmentConfig
 
 ```
 
-FLASK_APP=api/api.py pipenv run flask run
+FLASK_APP=content_store/api/api.py pipenv run flask run
 ```
