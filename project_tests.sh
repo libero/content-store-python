@@ -2,4 +2,5 @@
 
 set -e
 
-pylint content_store/api/*.py
+pytest && \
+    pylint content_store/api/*.py
