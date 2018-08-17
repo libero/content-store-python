@@ -8,6 +8,7 @@ pytest = "~=3.7.1"
 
 [packages]
 flask = "~=1.0.2"
+flask-sqlalchemy = "*"
 
 [requires]
 python_version = "3.6"
