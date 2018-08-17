@@ -1,7 +1,7 @@
 import os
 import json
 from flask import Flask, make_response, request
-from content_store.api.models import ArticleVersion
+from content_store.api.models import PlaceholderArticleVersion
 from uuid import uuid4
 from content_store.api.database import db
 from content_store.api.config import DevelopmentConfig
@@ -48,7 +48,7 @@ def create_app(config=None):
         temporary route to test persistence
         :return:
         """
-        ac = ArticleVersion(str(uuid4()), 1, "Article content test")
+        ac = PlaceholderArticleVersion(str(uuid4()), 1, "Article content test")
         db.session.add(ac)
         db.session.commit()
         response = make_response(json.dumps("done"))

@@ -3,7 +3,7 @@ from content_store.api.database import db
 ID_LENGTH = 36
 
 
-class ArticleVersion(db.Model):
+class PlaceholderArticleVersion(db.Model):
 
     id = db.Column(db.String(ID_LENGTH), primary_key=True)
     version = db.Column(db.Integer())
