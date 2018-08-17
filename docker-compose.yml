@@ -9,7 +9,7 @@ services:
                 pipenv_dev_arg: ${PIPENV_DEV_ARG}
                 python_base_image_tag: ${PYTHON_BASE_IMAGE_TAG}
         image: libero/content-store_venv:${IMAGE_TAG}
-    web:
+    app:
         build:
             context: .
             dockerfile: Dockerfile

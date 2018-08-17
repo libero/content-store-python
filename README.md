@@ -29,7 +29,7 @@ curl -v localhost:5000/ping
 
 Running tests:
 ```
-docker-compose run web python -m pytest
+docker-compose run app python -m pytest
 ```
 
 Installing a new package

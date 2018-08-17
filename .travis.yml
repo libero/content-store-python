@@ -8,10 +8,10 @@ install:
     - docker-compose build
 
 before_script:
-    - docker-compose up -d web
+    - docker-compose up -d app
 
 script:
-    - docker-compose run web python -m pytest
+    - docker-compose run app python -m pytest
     - ./.docker/smoke-tests.sh
 
 after_script:
