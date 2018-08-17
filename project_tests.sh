@@ -2,4 +2,4 @@
 
 set -e
 
-pylint api/*.py
+pylint content_store/api/*.py
