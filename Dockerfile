@@ -10,6 +10,7 @@ WORKDIR /app
 ENV PYTHONPATH=.
 COPY content_store/ content_store/
 COPY tests/ tests/
+COPY project_tests.sh ./
 # if there is work to be done here, move the venv copying after it
 
 CMD ["python"]
