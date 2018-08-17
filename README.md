@@ -31,3 +31,11 @@ Running tests:
 ```
 docker-compose run web python -m pytest
 ```
+
+Installing a new package
+```
+docker-compose run --name my_install venv pipenv install uwsgi
+docker cp my_install:/Pipfile.lock Pipfile.lock
+docker cp my_install:/Pipfile.lock Pipfile.lock
+docker rm my_install
+```
