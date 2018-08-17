@@ -6,6 +6,7 @@ from uuid import uuid4
 from content_store.api.database import db
 from content_store.api.config import DevelopmentConfig
 
+
 def create_app(config=None):
     """
     application factory
