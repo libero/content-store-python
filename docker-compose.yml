@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    venv:
+        build:
+            context: .
+            dockerfile: Dockerfile.venv
+            args:
+                pipenv_dev_arg: ${PIPENV_DEV_ARG}
+                python_base_image_tag: ${PYTHON_BASE_IMAGE_TAG}
+        image: libero/content-store_venv:${IMAGE_TAG}
+    web:
+        build:
+            context: .
+            dockerfile: Dockerfile
+            args:
+                image_tag: ${IMAGE_TAG}
+                python_base_image_tag: ${PYTHON_BASE_IMAGE_TAG}
+        image: libero/content-store:${IMAGE_TAG}
+        environment:
+            - FLASK_APP=content_store/api/api.py
+        command: flask run --host=0.0.0.0
+        stop_signal: SIGINT
+        ports:
+            - 5000:5000
+        depends_on:
+            - venv
