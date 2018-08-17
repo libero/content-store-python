@@ -19,7 +19,7 @@ Running the application locally (to be removed when Docker becomes the primary d
 
 For non-development configuration set APP_SETTINGS environment variable to the module to use. Defaults to `content_store.api.config.DevelopmentConfig`
 
-FLASK_APP=api/api.py pipenv run flask run
+FLASK_APP=content_store/api/api.py PYTHONPATH=. pipenv run flask run
 ```
 
 Checking the application is responding:
