@@ -12,4 +12,5 @@ COPY content_store/ content_store/
 COPY tests/ tests/
 # if there is work to be done here, move the venv copying after it
 
-CMD ["python"]
+#USER nobody
+CMD ["uwsgi", "--ini=uwsgi.ini"]
