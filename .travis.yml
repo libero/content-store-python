@@ -1,0 +1,18 @@
+sudo: required
+
+language: minimal
+
+services: docker
+
+install:
+    - docker-compose build
+
+before_script:
+    - docker-compose up -d web
+
+script:
+    - docker-compose run web python -m pytest
+    - ./.docker/smoke-tests.sh
+
+after_script:
+    - docker-compose down
