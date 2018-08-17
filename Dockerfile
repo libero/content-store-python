@@ -4,7 +4,7 @@ FROM libero/content-store_venv:${image_tag} as venv
 FROM python:${python_base_image_tag}
 
 COPY --from=venv /.venv/ /.venv/
-ENV PYTHONUSERBASE=/.venv PATH=/.venv/bin:$PATH 
+ENV PYTHONUSERBASE=/.venv PATH=/.venv/bin:$PATH
 
 WORKDIR /app
 ENV PYTHONPATH=.
