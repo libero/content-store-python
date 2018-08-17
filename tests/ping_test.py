@@ -1,20 +1,19 @@
 import pytest
-from api.api import create_app
+from content_store.api.api import create_app
+from content_store.api.config import TestingConfig
 
 
 @pytest.fixture
 def client():
 
-    app = create_app(debug=True)
+    app = create_app(config=TestingConfig)
     ctx = app.app_context()
     ctx.push()
 
-    # eventual db init
     client = app.test_client()
 
     yield client
 
-    # eventual db cleanup
     ctx.pop()
 
 
