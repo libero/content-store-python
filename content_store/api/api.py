@@ -49,8 +49,8 @@ def create_app(config=None):
         temporary route to test persistence
         :return:
         """
-        ac = PlaceholderArticleVersion(str(uuid4()), 1, "Article content test")
-        db.session.add(ac)
+        article_version = PlaceholderArticleVersion(str(uuid4()), 1, "Article content test")
+        db.session.add(article_version)
         db.session.commit()
         response = make_response(json.dumps("done"))
         response.headers["Content-Type"] = "application/json"
