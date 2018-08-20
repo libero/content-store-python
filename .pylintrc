@@ -4,6 +4,10 @@ disable=
     missing-docstring,
     too-few-public-methods
 
+[BASIC]
+good-names=
+    id
+
 [TYPECHECK]
 ignored-classes=
     scoped_session,
