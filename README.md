@@ -32,11 +32,8 @@ Running tests:
 docker-compose run app python -m pytest
 ```
 
-Installing a new package
+Installing a new package:
 ```
 docker-compose build
-docker-compose run --name my_install venv pipenv install uwsgi
-docker cp my_install:/Pipfile Pipfile
-docker cp my_install:/Pipfile.lock Pipfile.lock
-docker rm my_install
+docker-compose run --rm venv /bin/sh -c 'pipenv install requests && pipenv lock'
 ```
