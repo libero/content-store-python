@@ -1,13 +1,13 @@
-from content_store.api.database import db
+from content_store.api.database import DB
 
 ID_LENGTH = 100
 
 
-class PlaceholderArticleVersion(db.Model):
+class PlaceholderArticleVersion(DB.Model):
 
-    id = db.Column(db.String(ID_LENGTH), primary_key=True)
-    version = db.Column(db.Integer())
-    content = db.Column(db.Text())
+    id = DB.Column(DB.String(ID_LENGTH), primary_key=True)
+    version = DB.Column(DB.Integer())
+    content = DB.Column(DB.Text())
 
     def __init__(self, av_id: str, version: int, content=str) -> None:
 

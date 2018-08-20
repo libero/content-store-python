@@ -5,7 +5,7 @@ from uuid import uuid4
 from flask import Flask, make_response, request
 
 from content_store.api.models import PlaceholderArticleVersion
-from content_store.api.database import db
+from content_store.api.database import DB
 from content_store.api.config import DevelopmentConfig
 
 
@@ -25,11 +25,11 @@ def create_app(config=None):
             app.config.from_object(os.environ["APP_SETTINGS"])
         else:
             app.config.from_object(DevelopmentConfig)
-    db.init_app(app)
+    DB.init_app(app)
 
     # TODO : add migrations
     with app.app_context():
-        db.create_all()
+        DB.create_all()
 
     # could move to blueprint
     @app.route("/ping")
@@ -52,8 +52,8 @@ def create_app(config=None):
         :return:
         """
         article_version = PlaceholderArticleVersion(str(uuid4()), 1, "Article content test")
-        db.session.add(article_version)
-        db.session.commit()
+        DB.session.add(article_version)
+        DB.session.commit()
         response = make_response(json.dumps("done"))
         response.headers["Content-Type"] = "application/json"
         return response
