@@ -33,7 +33,7 @@ def create_app(config=None):
 
     # could move to blueprint
     @app.route("/ping")
-    def ping():
+    def _ping():
         """
         simple pingpong responder
         :return: response with content "pong"
@@ -46,7 +46,7 @@ def create_app(config=None):
         return resp
 
     @app.route("/testdb", methods=["POST"])
-    def testdb():
+    def _testdb():
         """
         temporary route to test persistence
         :return:
