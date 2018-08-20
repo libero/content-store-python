@@ -1,0 +1,10 @@
+[MESSAGES CONTROL]
+disable=
+    fixme,
+    missing-docstring,
+    too-few-public-methods
+
+[TYPECHECK]
+ignored-classes=
+    scoped_session,
+    SQLAlchemy
