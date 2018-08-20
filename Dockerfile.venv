@@ -5,8 +5,10 @@ FROM python:${python_base_image_tag}
 RUN apk update && apk add gcc libc-dev linux-headers
 RUN pip install --no-cache-dir --only-binary --upgrade pipenv
 
-COPY Pipfile Pipfile.lock ./
+RUN python -m venv /.venv
+ENV VIRTUAL_ENV=/.venv PYTHONUSERBASE=/.venv PATH=/.venv/bin:$PATH
+COPY Pipfile Pipfile.lock /pipfiles/
 
 ARG pipenv_dev_arg
-ENV PIPENV_VENV_IN_PROJECT=1 
+WORKDIR /pipfiles
 RUN pipenv install ${pipenv_dev_arg} --deploy --ignore-pipfile
