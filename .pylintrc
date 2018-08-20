@@ -1,6 +1,5 @@
 [MESSAGES CONTROL]
 disable=
-    fixme,
     missing-docstring,
     too-few-public-methods
 

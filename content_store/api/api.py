@@ -27,7 +27,7 @@ def create_app(config=None):
             app.config.from_object(DevelopmentConfig)
     DB.init_app(app)
 
-    # TODO : add migrations
+    # database setup (will use migration in the future)
     with app.app_context():
         DB.create_all()
 
