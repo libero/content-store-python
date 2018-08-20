@@ -1,8 +1,10 @@
 import os
 import json
-from flask import Flask, make_response, request
-from content_store.api.models import PlaceholderArticleVersion
 from uuid import uuid4
+
+from flask import Flask, make_response, request
+
+from content_store.api.models import PlaceholderArticleVersion
 from content_store.api.database import db
 from content_store.api.config import DevelopmentConfig
 
