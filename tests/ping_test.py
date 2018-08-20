@@ -3,16 +3,14 @@ from content_store.api.api import create_app
 from content_store.api.config import TestingConfig
 
 
-@pytest.fixture
-def client():
+@pytest.fixture(name="client")
+def _client():
 
     app = create_app(config=TestingConfig)
     ctx = app.app_context()
     ctx.push()
 
-    client = app.test_client()
-
-    yield client
+    yield app.test_client()
 
     ctx.pop()
 
