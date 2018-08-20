@@ -3,4 +3,4 @@
 set -e
 
 pytest && \
-    pylint content_store/api/*.py
+    pylint content_store
