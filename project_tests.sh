@@ -3,4 +3,4 @@
 set -e
 
 pytest && \
-    pylint content_store
+    pylint content_store tests
