@@ -11,7 +11,7 @@ before_script:
     - docker-compose up -d web
 
 script:
-    - docker-compose run web ./project_tests.sh
+    - docker-compose run web ./project-tests.sh
     - ./.docker/smoke-tests.sh
 
 after_script:
