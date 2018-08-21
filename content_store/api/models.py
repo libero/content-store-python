@@ -19,5 +19,7 @@ class ArticlePart(DB.Model):
         self.content = content
 
     def __repr__(self) -> str:
-        return "<ArticlePart {id}->{version}->{part_name}".format(id=self.av_id, version=self.version,
+
+        return "<ArticlePart {id}->{version}->{part_name}".format(id=self.av_id,
+                                                                  version=self.version,
                                                                   part_name=self.part_name)

@@ -24,7 +24,6 @@ def create_app(config=None):
             app.config.from_object(DevelopmentConfig)
     DB.init_app(app)
 
-   
     # could move to blueprint
     @app.route("/ping")
     def _ping():

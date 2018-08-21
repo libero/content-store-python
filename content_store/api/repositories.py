@@ -13,12 +13,14 @@ class ArticlePartRepository:
     def delete_article_part(self, id, version, part_name) -> None:
 
         try:
-            article_part = DB.session.query(ArticlePart).filter_by(id=id, version=version, part_name=part_name).one()
+            article_part = DB.session.query(ArticlePart).filter_by(id=id, version=version,
+                                                                   part_name=part_name).one()
             DB.session.delete(article_part)
         except NoResultFound:
             pass
 
     def get_article_part(self, id, version, part_name) -> ArticlePart:
 
-        article_part = DB.session.query(ArticlePart).filter_by(id=id, version=version, part_name=part_name).one()
+        article_part = DB.session.query(ArticlePart).filter_by(id=id, version=version,
+                                                               part_name=part_name).one()
         return article_part

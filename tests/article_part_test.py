@@ -30,13 +30,13 @@ def test_add_get_parts(app):
     for part in test_parts:
         article_parts.add_article_part(part)
 
-        assert part == article_parts.get_article_part(id=part.id, version=part.version, part_name=part.part_name)
+        assert part == article_parts.get_article_part(id=part.id, version=part.version,
+                                                      part_name=part.part_name)
 
 
 def test_delete_part(app):
 
     with app.app_context():
-
         article_parts = ArticlePartRepository()
         test_part = ArticlePart("001", 1, "front", "Article 001 front matter content v1")
         article_parts.add_article_part(test_part)
@@ -44,5 +44,5 @@ def test_delete_part(app):
         assert part == test_part
         article_parts.delete_article_part(part.id, part.version, part.part_name)
         with pytest.raises(NoResultFound):
-            part_again = article_parts.get_article_part(test_part.id, test_part.version, test_part.part_name)
-
+            part_again = article_parts.get_article_part(test_part.id, test_part.version,
+                                                        test_part.part_name)
