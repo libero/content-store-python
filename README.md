@@ -14,11 +14,9 @@ docker-compose up -d
 ```
 
 Running the application locally (to be removed when Docker becomes the primary development mode):
->>>>>>> origin/master
-```
-
 For non-development configuration set APP_SETTINGS environment variable to the module to use. Defaults to `content_store.api.config.DevelopmentConfig`
 
+```
 FLASK_APP=content_store/api/api.py PYTHONPATH=. pipenv run flask run
 ```
 
