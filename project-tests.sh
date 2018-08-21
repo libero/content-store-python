@@ -6,4 +6,5 @@ set -e
 export PYTHONOPTIMIZE=
 
 pytest && \
-    pylint content_store tests
+    pylint content_store tests && \
+    flake8 content_store tests
