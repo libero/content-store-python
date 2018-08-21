@@ -2,10 +2,10 @@ ARG python_base_image_tag
 FROM python:${python_base_image_tag}
 
 # uwsgi build process dependencies
-RUN apk add --no-cache gcc libc-dev linux-headers
-RUN pip install --no-cache-dir --only-binary --upgrade pipenv
+RUN apk add --no-cache gcc libc-dev linux-headers \
+ && pip install --no-cache-dir --only-binary --upgrade pipenv \
+ && python -m venv /.venv
 
-RUN python -m venv /.venv
 ENV VIRTUAL_ENV=/.venv PYTHONUSERBASE=/.venv PATH=/.venv/bin:$PATH
 COPY Pipfile Pipfile.lock /pipfiles/
 
