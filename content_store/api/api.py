@@ -1,9 +1,11 @@
 import os
 import json
-from flask import Flask, make_response, request
-from content_store.api.models import PlaceholderArticleVersion
 from uuid import uuid4
-from content_store.api.database import db
+
+from flask import Flask, make_response, request
+
+from content_store.api.models import PlaceholderArticleVersion
+from content_store.api.database import DB
 from content_store.api.config import DevelopmentConfig
 
 
@@ -23,15 +25,15 @@ def create_app(config=None):
             app.config.from_object(os.environ["APP_SETTINGS"])
         else:
             app.config.from_object(DevelopmentConfig)
-    db.init_app(app)
+    DB.init_app(app)
 
-    # TODO : add migrations
+    # database setup (will use migration in the future)
     with app.app_context():
-        db.create_all()
+        DB.create_all()
 
     # could move to blueprint
     @app.route("/ping")
-    def ping():
+    def _ping():
         """
         simple pingpong responder
         :return: response with content "pong"
@@ -44,14 +46,14 @@ def create_app(config=None):
         return resp
 
     @app.route("/testdb", methods=["POST"])
-    def testdb():
+    def _testdb():
         """
         temporary route to test persistence
         :return:
         """
-        ac = PlaceholderArticleVersion(str(uuid4()), 1, "Article content test")
-        db.session.add(ac)
-        db.session.commit()
+        article_version = PlaceholderArticleVersion(str(uuid4()), 1, "Article content test")
+        DB.session.add(article_version)
+        DB.session.commit()
         response = make_response(json.dumps("done"))
         response.headers["Content-Type"] = "application/json"
         return response
