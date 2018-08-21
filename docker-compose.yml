@@ -17,7 +17,6 @@ services:
                 image_tag: ${IMAGE_TAG}
                 python_base_image_tag: ${PYTHON_BASE_IMAGE_TAG}
         image: libero/content-store:${IMAGE_TAG}
-        # TODO: check what to use for uwsgi
         stop_signal: SIGINT
         volumes:
             - ./.docker/uwsgi.ini:/app/uwsgi.ini
