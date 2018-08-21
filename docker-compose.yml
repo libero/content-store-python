@@ -25,3 +25,8 @@ services:
             - 5000:5000
         depends_on:
             - venv
+    markdownlint:
+        image: gouvinb/docker-markdownlint
+        command: --version
+        volumes:
+            - .:/data
