@@ -2,7 +2,7 @@ ARG python_base_image_tag
 FROM python:${python_base_image_tag}
 
 # uwsgi build process dependencies
-RUN apk update && apk add gcc libc-dev linux-headers
+RUN apk add --no-cache gcc libc-dev linux-headers
 RUN pip install --no-cache-dir --only-binary --upgrade pipenv
 
 RUN python -m venv /.venv
