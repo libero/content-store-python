@@ -13,6 +13,7 @@ before_script:
 script:
     - docker-compose run web ./project-tests.sh
     - ./.docker/smoke-tests.sh
+    - docker-compose run markdownlint *.md
 
 after_script:
     - docker-compose down
