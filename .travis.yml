@@ -11,7 +11,7 @@ before_script:
     - docker-compose up -d app
 
 script:
-    - docker-compose run app python -m pytest
+    - docker-compose run app ./project-tests.sh
     - ./.docker/smoke-tests.sh
 
 after_script:

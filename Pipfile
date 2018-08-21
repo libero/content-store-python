@@ -5,6 +5,7 @@ name = "pypi"
 
 [dev-packages]
 pytest = "~=3.7.1"
+pylint = "~=2.1"
 
 [packages]
 flask = "~=1.0.2"
