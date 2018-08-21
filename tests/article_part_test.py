@@ -20,7 +20,7 @@ def app():
 @pytest.mark.usefixtures("app")
 def test_add_get_parts():
 
-    article_parts = ArticlePartRepository()
+    article_parts = ArticlePartRepository(DB)
 
     test_parts = (
         ArticlePart("001", 1, "front", "Article 001 front matter content v1"),
@@ -41,7 +41,7 @@ def test_add_get_parts():
 @pytest.mark.usefixtures("app")
 def test_delete_part():
 
-    article_parts = ArticlePartRepository()
+    article_parts = ArticlePartRepository(DB)
     test_part = ArticlePart("001", 1, "front", "Article 001 front matter content v1")
     article_parts.add_article_part(test_part)
     part = article_parts.get_article_part(
