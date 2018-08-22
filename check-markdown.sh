@@ -2,4 +2,6 @@
 
 set -e
 
-docker run --rm -v $(pwd):/data gouvinb/docker-markdownlint *.md
+docker run --rm -v $(pwd):/data gouvinb/docker-markdownlint \
+    --config .markdownlint \
+    *.md
