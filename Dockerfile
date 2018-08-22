@@ -16,4 +16,4 @@ COPY project-tests.sh \
     ./
 # if there is work to be done here, move the venv copying after it
 
-CMD ["python"]
+CMD ["uwsgi", "--ini=uwsgi.ini"]
