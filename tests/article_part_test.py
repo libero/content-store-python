@@ -1,25 +1,11 @@
 import pytest
 from sqlalchemy.orm.exc import NoResultFound
-from content_store.api.api import create_app
-from content_store.api.config import TestingConfig
 from content_store.api.models import ArticlePart
 from content_store.api.repositories import ArticlePartRepository
 from content_store.api.database import DB
 
 
-@pytest.fixture
-def app():
-    """
-    application fixture
-    """
-    application = create_app(TestingConfig)
-    with application.app_context():
-        DB.drop_all()
-        DB.create_all()
-        yield application
-
-
-@pytest.mark.usefixtures("app")
+@pytest.mark.usefixtures("client")
 def test_add_get_parts():
     """
     test adding and retrieving a part
@@ -44,7 +30,7 @@ def test_add_get_parts():
         assert str(part) == f"<ArticlePart {part.article_id}->{part.version}->{part.part_name}>"
 
 
-@pytest.mark.usefixtures("app")
+@pytest.mark.usefixtures("client")
 def test_delete_part():
     """
     test deletion of a part
@@ -74,7 +60,7 @@ def test_delete_part():
         )
 
 
-@pytest.mark.usefixtures("app")
+@pytest.mark.usefixtures("client")
 def test_delete_unknown_part():
     """
     test deletion of a part
