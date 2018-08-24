@@ -6,12 +6,11 @@ VERSION_EG = 1
 PART_NAME_EG = "front"
 
 
-def test_article_put_get(app):
+def test_article_put_get(client):
     """
     test article put and part get endpoints
-    :param app: Flask application
+    :param client: Flask test client
     """
-    client = app.test_client()
     prefix = client.application.config['PREFIX']
 
     path = Path("tests/fixtures/content_1.xml")
@@ -33,24 +32,22 @@ def test_article_put_get(app):
     assert response_text == original_front_text
 
 
-def test_article_not_found(app):
+def test_article_not_found(client):
     """
     test unknown article
-    :param app: Flask application
+    :param client: Flask test client
     """
-    client = app.test_client()
     prefix = client.application.config['PREFIX']
 
     response = client.get(f"/{prefix}/{ARTICLE_ID_EG}/versions/{VERSION_EG}/{PART_NAME_EG}")
     assert response.status_code == 404
 
 
-def test_invalid_part(app):
+def test_invalid_part(client):
     """
     test article put of invalid part
-    :param app: Flask application
+    :param client: Flask test client
     """
-    client = app.test_client()
     prefix = client.application.config['PREFIX']
 
     path = Path("tests/fixtures/invalid_part.xml")
@@ -63,12 +60,11 @@ def test_invalid_part(app):
     assert put_article_response.status_code == 400
 
 
-def test_article_update(app):
+def test_article_update(client):
     """
     test article put and part get endpoints
-    :param app: Flask application
+    :param client: Flask test client
     """
-    client = app.test_client()
     prefix = client.application.config['PREFIX']
 
     path = Path("tests/fixtures/content_1.xml")

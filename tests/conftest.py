@@ -1,5 +1,6 @@
 import pytest
 from flask import Flask
+from flask.testing import FlaskClient
 from content_store.api.api import create_app
 from content_store.api.config import TestingConfig
 from content_store.api.database import DB
@@ -16,3 +17,8 @@ def application() -> Flask:
         DB.drop_all()
         DB.create_all()
         yield app
+
+
+@pytest.fixture()
+def client(app) -> FlaskClient:
+    return app.test_client()
