@@ -31,6 +31,8 @@ def create_app(config=None):
     with app.app_context():
         DB.create_all()
 
+    part_repo = ArticlePartRepository(DB)
+
     # could move routes to blueprint
 
     @app.route("/ping")
@@ -61,7 +63,6 @@ def create_app(config=None):
             return "invalid content", 400
 
         front_text = etree.tostring(front).strip()
-        part_repo = ArticlePartRepository(DB)
 
         part = ArticlePart(article_id, version, 'front', front_text)
         added_not_updated = part_repo.add_or_update_article_part(part)
@@ -80,7 +81,6 @@ def create_app(config=None):
         :return: the xml content of the specified part or a status string if unsucessful
         """
         # could validate part name here
-        part_repo = ArticlePartRepository(DB)
         try:
             part = part_repo.get_article_part(article_id, version, part_name)
         except NoResultFound:
