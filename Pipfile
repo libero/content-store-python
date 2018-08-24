@@ -7,12 +7,12 @@ name = "pypi"
 pytest = "~=3.7.1"
 pylint = "~=2.1"
 "flake8" = "~=3.5"
-lxml = "~=4.2"
 
 [packages]
 flask = "~=1.0.2"
 flask-sqlalchemy = "~=2.3.2"
 uwsgi = "~=2.0.17"
+lxml = "~=4.2"
 
 [requires]
 python_version = "3.6"
