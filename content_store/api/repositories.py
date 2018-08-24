@@ -14,10 +14,9 @@ class ArticlePartRepository:
         :return: True for add or false for update
         """
         added_not_updated = False
-        try:
-            self.get_article_part(article_part.article_id, article_part.version, article_part.part_name)
+        if self.part_exists(article_part.article_id, article_part.version, article_part.part_name):
             self.database.session.merge(article_part)
-        except NoResultFound:
+        else:
             self.database.session.add(article_part)
             added_not_updated = True
         self.database.session.commit()
@@ -44,3 +43,16 @@ class ArticlePartRepository:
             part_name=part_name
         ).one()
         return article_part
+
+    def part_exists(self, article_id, version, part_name):
+
+        try:
+            self.database.session.query(ArticlePart).filter_by(
+                article_id=article_id,
+                version=version,
+                part_name=part_name
+            ).one()
+        except NoResultFound:
+            return False
+
+        return True
