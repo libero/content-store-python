@@ -63,7 +63,7 @@ def test_delete_part():
 @pytest.mark.usefixtures("client")
 def test_delete_unknown_part():
     """
-    test deletion of a part
+    test deletion of an unknown part
     """
     article_parts = ArticlePartRepository(DB)
     test_part = ArticlePart("998", 1, "front", "Article 001 front matter content v1")

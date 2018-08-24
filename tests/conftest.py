@@ -1,11 +1,12 @@
 import pytest
+from flask.testing import FlaskClient
 from content_store.api.api import create_app
 from content_store.api.config import TestingConfig
 from content_store.api.database import DB
 
 
-@pytest.fixture(name="client")
-def _client():
+@pytest.fixture()
+def client() -> FlaskClient:
     """
     application factory method
     :return: flask application
