@@ -1,7 +1,7 @@
 def test_api_ping(client):
     """
     test pingpong endpoint
-    :param app: flask application
+    :param client: flask application test client
     """
     res = client.get("/ping")
     assert res.data == b"pong"

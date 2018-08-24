@@ -5,8 +5,8 @@ from sqlalchemy.orm.exc import NoResultFound
 
 from content_store.api.database import DB
 from content_store.api.config import DevelopmentConfig
-from content_store.api.models import ArticlePart
-from content_store.api.repositories import ArticlePartRepository
+from content_store.api.models import ContentPart
+from content_store.api.repositories import ContentPartRepository
 
 
 def create_app(config=None):
@@ -31,7 +31,7 @@ def create_app(config=None):
     with app.app_context():
         DB.create_all()
 
-    part_repo = ArticlePartRepository(DB)
+    part_repo = ContentPartRepository(DB)
 
     # could move routes to blueprint
 
@@ -48,11 +48,11 @@ def create_app(config=None):
             resp.headers["Expires"] = 0
         return resp
 
-    @app.route("/" + app.config["PREFIX"] + "/<string:article_id>/versions/<int:version>", methods=["PUT"])
-    def _put_version(article_id, version):
+    @app.route("/" + app.config["PREFIX"] + "/<string:content_id>/versions/<int:version>", methods=["PUT"])
+    def _put_version(content_id, version):
         """
-        :param article_id: id of the article
-        :param version: version of the article
+        :param content_id: id of the content
+        :param version: version of the content
         :return: status string
         """
         root = etree.fromstring(request.get_data())
@@ -64,25 +64,25 @@ def create_app(config=None):
 
         front_text = etree.tostring(front).strip()
 
-        part = ArticlePart(article_id, version, 'front', front_text)
-        added_not_updated = part_repo.add_or_update_article_part(part)
+        part = ContentPart(content_id, version, 'front', front_text)
+        added_not_updated = part_repo.add_or_update_content_part(part)
         status = 201 if added_not_updated else 200
         resp = make_response("done", status)
 
         return resp
 
-    @app.route("/" + app.config["PREFIX"] + "/<string:article_id>/versions/<int:version>/<string:part_name>",
+    @app.route("/" + app.config["PREFIX"] + "/<string:content_id>/versions/<int:version>/<string:part_name>",
                methods=["GET"])
-    def _get_part(article_id, version, part_name):
+    def _get_part(content_id, version, part_name):
         """
-        :param article_id: id of the article
-        :param version: version of the article
+        :param content_id: id of the content
+        :param version: version of the content
         :param part_name: the name of the part
         :return: the xml content of the specified part or a status string if unsucessful
         """
         # could validate part name here
         try:
-            part = part_repo.get_article_part(article_id, version, part_name)
+            part = part_repo.get_content_part(content_id, version, part_name)
         except NoResultFound:
             return "part not found", 404
 

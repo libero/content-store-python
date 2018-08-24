@@ -1,14 +1,14 @@
 from pathlib import Path
 from lxml import etree
 
-ARTICLE_ID_EG = "el001"
+CONTENT_ID_EG = "el001"
 VERSION_EG = 1
 PART_NAME_EG = "front"
 
 
-def test_article_put_get(client):
+def test_content_put_get(client):
     """
-    test article put and part get endpoints
+    test content put and part get endpoints
     :param client: Flask test client
     """
     prefix = client.application.config['PREFIX']
@@ -19,12 +19,12 @@ def test_article_put_get(client):
     original_front_element = original_tree.find("{http://libero.pub}front")
     original_front_text = etree.tostring(original_front_element).strip()
 
-    put_article_response = client.put(
-        f"/{prefix}/{ARTICLE_ID_EG}/versions/{VERSION_EG}",
+    put_content_response = client.put(
+        f"/{prefix}/{CONTENT_ID_EG}/versions/{VERSION_EG}",
         data=content
     )
-    assert put_article_response.status_code == 201
-    get_part_response = client.get(f"/{prefix}/{ARTICLE_ID_EG}/versions/{VERSION_EG}/{PART_NAME_EG}")
+    assert put_content_response.status_code == 201
+    get_part_response = client.get(f"/{prefix}/{CONTENT_ID_EG}/versions/{VERSION_EG}/{PART_NAME_EG}")
     assert get_part_response
     response_tree = etree.fromstring(get_part_response.data.decode())
     response_text = etree.tostring(response_tree)
@@ -32,20 +32,20 @@ def test_article_put_get(client):
     assert response_text == original_front_text
 
 
-def test_article_not_found(client):
+def test_content_not_found(client):
     """
-    test unknown article
+    test unknown content
     :param client: Flask test client
     """
     prefix = client.application.config['PREFIX']
 
-    response = client.get(f"/{prefix}/{ARTICLE_ID_EG}/versions/{VERSION_EG}/{PART_NAME_EG}")
+    response = client.get(f"/{prefix}/{CONTENT_ID_EG}/versions/{VERSION_EG}/{PART_NAME_EG}")
     assert response.status_code == 404
 
 
 def test_invalid_part(client):
     """
-    test article put of invalid part
+    test content put of invalid part
     :param client: Flask test client
     """
     prefix = client.application.config['PREFIX']
@@ -53,16 +53,16 @@ def test_invalid_part(client):
     path = Path("tests/fixtures/invalid_part.xml")
     content = path.read_bytes()
 
-    put_article_response = client.put(
-        f"/{prefix}/{ARTICLE_ID_EG}/versions/{VERSION_EG}",
+    put_content_response = client.put(
+        f"/{prefix}/{CONTENT_ID_EG}/versions/{VERSION_EG}",
         data=content
     )
-    assert put_article_response.status_code == 400
+    assert put_content_response.status_code == 400
 
 
-def test_article_update(client):
+def test_content_update(client):
     """
-    test article put and part get endpoints
+    test content put and part get endpoints
     :param client: Flask test client
     """
     prefix = client.application.config['PREFIX']
@@ -70,11 +70,11 @@ def test_article_update(client):
     path = Path("tests/fixtures/content_1.xml")
     content = path.read_bytes()
 
-    put_article_response = client.put(
-        f"/{prefix}/{ARTICLE_ID_EG}/versions/{VERSION_EG}",
+    put_content_response = client.put(
+        f"/{prefix}/{CONTENT_ID_EG}/versions/{VERSION_EG}",
         data=content
     )
-    assert put_article_response.status_code == 201
+    assert put_content_response.status_code == 201
 
     path = Path("tests/fixtures/content_2.xml")
     content = path.read_bytes()
@@ -82,13 +82,13 @@ def test_article_update(client):
     original_front_element = original_tree.find("{http://libero.pub}front")
     update_front_text = etree.tostring(original_front_element).strip()
 
-    put_article_response = client.put(
-        f"/{prefix}/{ARTICLE_ID_EG}/versions/{VERSION_EG}",
+    put_content_response = client.put(
+        f"/{prefix}/{CONTENT_ID_EG}/versions/{VERSION_EG}",
         data=content
     )
-    assert put_article_response.status_code == 200
+    assert put_content_response.status_code == 200
 
-    get_part_response = client.get(f"/{prefix}/{ARTICLE_ID_EG}/versions/{VERSION_EG}/{PART_NAME_EG}")
+    get_part_response = client.get(f"/{prefix}/{CONTENT_ID_EG}/versions/{VERSION_EG}/{PART_NAME_EG}")
     assert get_part_response
     response_tree = etree.fromstring(get_part_response.data.decode())
     response_text = etree.tostring(response_tree)
