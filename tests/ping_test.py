@@ -1,9 +1,9 @@
-def test_api_ping(client):
+def test_api_ping(app):
     """
     test pingpong endpoint
-    :param client: client fixture
+    :param app: flask application
     """
-
+    client = app.test_client()
     res = client.get("/ping")
     assert res.data == b"pong"
     assert res.headers["Cache-Control"] == "no-store, must-revalidate"

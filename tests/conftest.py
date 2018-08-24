@@ -5,14 +5,14 @@ from content_store.api.config import TestingConfig
 from content_store.api.database import DB
 
 
-@pytest.fixture()
-def client() -> FlaskClient:
+@pytest.fixture(name="app")
+def application() -> FlaskClient:
     """
-    application factory method
-    :return: flask application
+    Flask application fixture
+    :return: flask application fixture
     """
     app = create_app(config=TestingConfig)
     with app.app_context():
         DB.drop_all()
         DB.create_all()
-        yield app.test_client()
+        yield app

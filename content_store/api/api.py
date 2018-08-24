@@ -48,7 +48,11 @@ def create_app(config=None):
 
     @app.route("/" + app.config["PREFIX"] + "/<string:article_id>/versions/<int:version>", methods=["PUT"])
     def _put_version(article_id, version):
-
+        """
+        :param article_id: id of the article
+        :param version: version of the article
+        :return: status string
+        """
         root = etree.fromstring(request.get_data())
         # Could validate against schema here
 
@@ -69,7 +73,12 @@ def create_app(config=None):
     @app.route("/" + app.config["PREFIX"] + "/<string:article_id>/versions/<int:version>/<string:part_name>",
                methods=["GET"])
     def _get_part(article_id, version, part_name):
-
+        """
+        :param article_id: id of the article
+        :param version: version of the article
+        :param part_name: the name of the part
+        :return: the xml content of the specified part or a status string if unsucessful
+        """
         # could validate part name here
         part_repo = ArticlePartRepository(DB)
         try:

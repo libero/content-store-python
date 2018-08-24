@@ -5,7 +5,7 @@ from content_store.api.repositories import ArticlePartRepository
 from content_store.api.database import DB
 
 
-@pytest.mark.usefixtures("client")
+@pytest.mark.usefixtures("app")
 def test_add_get_parts():
     """
     test adding and retrieving a part
@@ -30,7 +30,7 @@ def test_add_get_parts():
         assert str(part) == f"<ArticlePart {part.article_id}->{part.version}->{part.part_name}>"
 
 
-@pytest.mark.usefixtures("client")
+@pytest.mark.usefixtures("app")
 def test_delete_part():
     """
     test deletion of a part
@@ -60,7 +60,7 @@ def test_delete_part():
         )
 
 
-@pytest.mark.usefixtures("client")
+@pytest.mark.usefixtures("app")
 def test_delete_unknown_part():
     """
     test deletion of an unknown part
