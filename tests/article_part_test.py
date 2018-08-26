@@ -1,10 +1,11 @@
 import pytest
 from sqlalchemy.orm.exc import NoResultFound
+
 from content_store.api.api import create_app
 from content_store.api.config import TestingConfig
+from content_store.api.database import DB
 from content_store.api.models import ArticlePart
 from content_store.api.repositories import ArticlePartRepository
-from content_store.api.database import DB
 
 
 @pytest.fixture

@@ -2,8 +2,8 @@ import os
 
 from flask import Flask, make_response, request
 
-from content_store.api.database import DB
 from content_store.api.config import DevelopmentConfig
+from content_store.api.database import DB
 
 
 def create_app(config=None):
