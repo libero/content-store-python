@@ -1,4 +1,5 @@
 from sqlalchemy.orm.exc import NoResultFound
+
 from content_store.api.models import ArticlePart
 
 

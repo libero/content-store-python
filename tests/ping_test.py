@@ -1,4 +1,5 @@
 import pytest
+
 from content_store.api.api import create_app
 from content_store.api.config import TestingConfig
 

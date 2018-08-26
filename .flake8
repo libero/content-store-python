@@ -1,2 +1,4 @@
 [flake8]
+application-import-names = content_store
+import-order-style = google
 max-line-length = 100
