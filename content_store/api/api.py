@@ -1,41 +1,15 @@
-import os
+from flask import Blueprint, make_response, request
 from lxml import etree
-from flask import Flask, make_response, request
 from sqlalchemy.orm.exc import NoResultFound
 
-from content_store.api.database import DB
-from content_store.api.config import DevelopmentConfig
 from content_store.api.models import ContentPart
 from content_store.api.repositories import ContentPartRepository
 
 
-def create_app(config=None):
-    """
-    application factory
-    :param config: override config
-    :return: application
-    """
-    app = Flask(__name__)
+def create_blueprint(part_repo: ContentPartRepository) -> Blueprint:
+    blueprint = Blueprint('api', __name__)
 
-    # basic configurations setup for now
-    if config:
-        app.config.from_object(config)
-    else:
-        if "APP_SETTINGS" in os.environ:
-            app.config.from_object(os.environ["APP_SETTINGS"])
-        else:
-            app.config.from_object(DevelopmentConfig)
-    DB.init_app(app)
-
-    # create tables if required, will be replaced by migrations
-    with app.app_context():
-        DB.create_all()
-
-    part_repo = ContentPartRepository(DB)
-
-    # could move routes to blueprint
-
-    @app.route("/ping")
+    @blueprint.route("/ping")
     def _ping():
         """
         simple pingpong responder
@@ -48,7 +22,7 @@ def create_app(config=None):
             resp.headers["Expires"] = 0
         return resp
 
-    @app.route("/" + app.config["PREFIX"] + "/<string:content_id>/versions/<int:version>", methods=["PUT"])
+    @blueprint.route("/<string:content_id>/versions/<int:version>", methods=["PUT"])
     def _put_version(content_id, version):
         """
         :param content_id: id of the content
@@ -71,8 +45,8 @@ def create_app(config=None):
 
         return resp
 
-    @app.route("/" + app.config["PREFIX"] + "/<string:content_id>/versions/<int:version>/<string:part_name>",
-               methods=["GET"])
+    @blueprint.route("/<string:content_id>/versions/<int:version>/<string:part_name>",
+                     methods=["GET"])
     def _get_part(content_id, version, part_name):
         """
         :param content_id: id of the content
@@ -90,4 +64,4 @@ def create_app(config=None):
         resp.headers["Content-Type"] = "text/xml; charset=utf-8"
         return resp
 
-    return app
+    return blueprint
