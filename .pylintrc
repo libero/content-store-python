@@ -11,3 +11,7 @@ good-names=
 ignored-classes=
     scoped_session,
     SQLAlchemy
+extension-pkg-whitelist=lxml
+
+[FORMAT]
+max-line-length=120

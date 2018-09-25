@@ -3,6 +3,8 @@ ARG python_base_image_tag
 FROM libero/content-store_venv:${image_tag} as venv
 FROM python:${python_base_image_tag}
 
+RUN apk add --no-cache libxml2 libxslt
+
 COPY --from=venv /.venv/ /.venv/
 ENV PYTHONUSERBASE=/.venv PATH=/.venv/bin:$PATH
 

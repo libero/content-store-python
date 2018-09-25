@@ -2,7 +2,7 @@ ARG python_base_image_tag
 FROM python:${python_base_image_tag}
 
 # uwsgi and pylint build dependencies
-RUN apk add --no-cache gcc g++ libc-dev linux-headers \
+RUN apk add --no-cache gcc g++ libc-dev linux-headers libxml2-dev libxslt-dev \
  && pip install --no-cache-dir --only-binary --upgrade pipenv \
  && python -m venv /.venv
 

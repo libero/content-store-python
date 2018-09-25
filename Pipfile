@@ -12,6 +12,7 @@ pylint = "~=2.1"
 flask = "~=1.0.2"
 flask-sqlalchemy = "~=2.3.2"
 uwsgi = "~=2.0.17"
+lxml = "~=4.2"
 
 [requires]
 python_version = "3.6"
